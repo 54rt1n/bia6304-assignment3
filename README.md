@@ -50,6 +50,7 @@ assignment3/
 ## Setup
 
 1. Ensure you have Python 3.9 or higher installed.
+   - If you are on windows, see `Windows Installation` below.
 2. Install Poetry if you haven't already:
    ```
    pip install poetry
@@ -129,6 +130,18 @@ The core functionality is implemented in `assignment3.py`:
 ## Configuration
 
 The `Config` class in `config.py` manages configuration settings for the project. You can modify these settings to customize the behavior of the system.
+
+## Windows Installation
+
+Chromadb requires a C++ compiler to build. If you're on Windows, you might need to install a C++ compiler for some parts of the chromadb install.
+
+You can download the Visual C++ Build Tools from here:
+
+https://visualstudio.microsoft.com/visual-cpp-build-tools/
+
+You will need to download the installer, then select Individual Components and select the MSVC v143 build tools - VS 2022 C++ x64/x86 build tools (Latest).
+
+You will also need to install the Windows 11 SDK, whatever the latest version is.
 
 ## Troubleshooting
 

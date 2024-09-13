@@ -22,8 +22,9 @@ class DocumentQueryModel:
         preprocess = lambda x: x.split()  # Example preprocessing function
         dqm = DocumentQueryModel(preprocess, embedding_function, collection_name="my_collection")
 
+        dqm = DocumentQueryModel(preprocess, HuggingFaceEmbedding(), ...)
         # Index a document
-        dqm.insert("This is a sample document.")
+        dqm.insert("doc1", "This is a sample document.")
 
         print(f"Document count: {dqm.document_count}")
 
@@ -161,7 +162,14 @@ class DocumentQueryModel:
         results = self.collection.query(query_embeddings=embedding.tolist(), n_results=top_n)
 
         # Return the matched document IDs
-        return [(i, d) for i, d in zip(list(results['ids'][0]), list(results['distances'][0])) if threshold is None or d < threshold]
+        return [
+            # The results are the IDs and distances
+            (i, d)
+            # Use zip to pair the IDs and distances
+            for i, d in zip(list(results['ids'][0]), list(results['distances'][0]))
+            # Filter out documents that don't meet the threshold
+            if threshold is None or d < threshold
+        ]
 
     def get_document(self, doc_id: str) -> Optional[str]:
         """
