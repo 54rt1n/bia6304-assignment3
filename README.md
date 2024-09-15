@@ -57,7 +57,7 @@ assignment3/
    ```
 3. Clone the repository:
    ```
-   git clone https://github.com/54rt1n/assignment3.git
+   git clone https://github.com/54rt1n/bia6304-assignment3
    cd assignment3
    ```
 4. Install dependencies:
