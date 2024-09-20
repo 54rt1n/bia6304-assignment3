@@ -1,6 +1,7 @@
 # assignment/documents/dqm.py
 
 import chromadb
+import chromadb.errors
 import numpy as np
 from typing import List, Callable, Tuple, Optional
 
@@ -72,6 +73,9 @@ class DocumentQueryModel:
             self.collection = self.client.get_collection(self.collection_name) 
         except ValueError:
             self.collection = self.client.create_collection(self.collection_name)
+        except chromadb.errors.InvalidCollectionException:
+            self.collection = self.client.create_collection(self.collection_name)
+
 
     def _calculate_embedding(self, text: str) -> np.ndarray:
         """
