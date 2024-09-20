@@ -17,12 +17,15 @@ def mock_config():
     return Config(data_path="test_data.tsv", chromadb_path=None, collection_name="test_collection")
 
 @pytest.fixture
-def dqm():
+def dqm(mock_config):
     embedding = HuggingFaceEmbedding()
-    dqm = DocumentQueryModel(lambda x: x.lower().split(), embedding)
+    dqm = DocumentQueryModel(lambda x: x.lower().split(), embedding, collection_name=mock_config.collection_name)
     # Clear our collection
     dqm.clear()
     return dqm
+
+def test_setup_okay():
+    assert True
 
 def test_get_model(mock_config):
     model = get_model(mock_config)
